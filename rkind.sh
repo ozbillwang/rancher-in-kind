@@ -214,4 +214,4 @@ EOM
 ./rancher-custom-password.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}"
 
 # Open Rancher UI in browser
-open https://${localip}:${RANCHER_HTTPS_HOST_PORT}
+open https://${localip}:${RANCHER_HTTPS_HOST_PORT} ${KIND_CLUSTER_NAME}
