@@ -199,7 +199,7 @@ cat >&2 <<EOM
   > To work around "Unable to connect to the server: x509: certificate signed by unknown authority"
   > use "curl --insecure" which is provided by Rancher UI to get the manigest, piping it's output to, for example:
 
-    curl --insecure -sfL https://192.168.1.100:33486/v3/import/6qbm7q9lk7gmqsgt4l2hrrchlxbfh6fjskzb8tx84mjrl9jvhb8xcm.yaml | kubectl apply -f -
+    curl --insecure -sfL https://${localip}:${RANCHER_HTTPS_HOST_PORT}/v3/import/6qbm7q9lk7gmqsgt4l2hrrchlxbfh6fjskzb8tx84mjrl9jvhb8xcm.yaml | kubectl apply -f -
 
 - set context to kind cluster 
 
@@ -209,6 +209,9 @@ kubectl cluster-info --context kind-kind-for-rancher
 To shut everything down, use "$0 destroy", or manually with
 docker rm -f ${RANCHER_CONTAINER_NAME}; kind delete cluster ${KIND_CLUSTER_NAME}
 EOM
+
+# set Rancher admin password and add kind cluster
+./rancher-custom-password.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}"
 
 # Open Rancher UI in browser
 open https://${localip}:${RANCHER_HTTPS_HOST_PORT}
