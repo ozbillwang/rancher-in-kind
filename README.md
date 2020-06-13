@@ -24,14 +24,14 @@ Update kind (kuberentes in docker) configuration in local kind.yaml (https://kin
 ### Create the stack
 
 ```
-$ ./rkind.sh --create
+$ ./rkind.sh create
 INFO: Launching Rancher container
-cec8ff9b437bfe9234c56001a21fe5d9ba8423e182d25ab6dbe0f2b06f92308b
-INFO: Rancher UI will be available at https://192.168.1.100:33486
+522c72ef91bc725296afc95e809bab00c30be1739788b26cd39d22df4024b16a
+INFO: Rancher UI will be available at https://192.168.1.100:33976
 INFO: It might take few up to 60 seconds for Rancher UI to become available..
 INFO: While it's coming up, going to start KIND cluster
 No kind clusters found.
-INFO: Creating Kind cluster..
+INFO: Creating Kind cluster with 3 nodes (default)...
 Creating cluster "kind-for-rancher" ...
  ✓ Ensuring node image (kindest/node:v1.17.0) 🖼
  ✓ Preparing nodes 📦 📦 📦 📦
@@ -45,17 +45,25 @@ You can now use your cluster with:
 
 kubectl cluster-info --context kind-kind-for-rancher
 
-Have a nice day! 👋
+Thanks for using kind! 😊
 ### Next steps ###
 - Setup admin credentials in Rancher UI
-- Set "Rancher Server URL" to "https://192.168.1.100:33486" (should already be selected)
+- Set "Rancher Server URL" to "https://192.168.1.100:33976" (should already be selected)
   you may change it at any time in "Settings"
-- Import KIND cluster to Rancher (via https://192.168.1.100:33486/g/clusters/add?provider=import)
+- wait for 2 minute
+- Import KIND cluster to Rancher (via https://192.168.1.100:33976/g/clusters/add?provider=import)
   (select "Import Existing cluster" when adding a cluster)
-> To work around "Unable to connect to the server: x509: certificate signed by unknown authority"
-> use "curl --insecure" to get the manigest, piping it's output to
-> KUBECONFIG="$(kind get kubeconfig-path --name=kind-for-rancher)" kubectl apply -f -
-To shut everything down, use "./rkind.sh cleanup", or manually with
+  > To work around "Unable to connect to the server: x509: certificate signed by unknown authority"
+  > use "curl --insecure" which is provided by Rancher UI to get the manigest, piping it's output to, for example:
+
+    curl --insecure -sfL https://192.168.1.100:33486/v3/import/6qbm7q9lk7gmqsgt4l2hrrchlxbfh6fjskzb8tx84mjrl9jvhb8xcm.yaml | kubectl apply -f -
+
+- set context to kind cluster
+
+kubectl cluster-info --context kind-kind-for-rancher
+
+### Destroy
+To shut everything down, use "./rkind.sh destroy", or manually with
 docker rm -f rancher-for-kind; kind delete cluster kind-for-rancher
 ```
 ### destroy the stack
