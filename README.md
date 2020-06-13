@@ -2,7 +2,26 @@
 
 This repo is used to create rancher and add a kubernetes cluster with kind (kubernetes in docker) in Rancher.
 
-# Create the stack
+### Get help
+
+```
+$ ./rkind.sh
+Usage: ./rkind.sh [FLAGS] [ACTIONS]
+  FLAGS:
+    -h | --help | --usage   displays usage
+    -q | --quiet            enabled quiet mode, no output except errors
+    --debug                 enables debug mode, ignores quiet mode
+  ACTIONS:
+    create                create new Rancher & Kind cluster
+    destroy               destroy Rancher & Kind cluster created by this script
+  Examples:
+    $ ./rkind.sh create
+    $ ./rkind.sh destroy
+
+Update kind (kuberentes in docker) configuration in kind.yaml (https://kind.sigs.k8s.io/)
+```
+
+### Create the stack
 
 ```
 $ ./rkind.sh --create
