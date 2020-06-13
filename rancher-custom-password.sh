@@ -30,9 +30,6 @@ CLUSTERRESPONSE=`curl -s "https://${url}/v3/cluster" -H 'content-type: applicati
 CLUSTERID=`echo $CLUSTERRESPONSE | jq -r .id`
 echo ${CLUSTERID}
 
-# Specify role flags to use
-ROLEFLAGS="--etcd --controlplane --worker"
-
 # Generate token (clusterRegistrationToken) and extract nodeCommand
 AGENTCOMMAND=`curl -s "https://${url}/v3/clusterregistrationtoken" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" --data-binary '{"type":"clusterRegistrationToken","clusterId":"'$CLUSTERID'"}' --insecure | jq -r .insecureCommand`
 
