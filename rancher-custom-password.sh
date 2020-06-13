@@ -4,6 +4,7 @@
 
 URL="$1"
 KIND_CLUSTER_NAME="$2"
+PASSWORD="password"
 
 while ! cURL -k "https://${URL}/ping"; do sleep 3; done
 
@@ -13,7 +14,7 @@ LOGINTOKEN=`echo $LOGINRESPONSE | jq -r .token`
 echo ${LOGINTOKEN}
 
 # Change password
-cURL -s "https://${URL}/v3/users?action=changepassword" -H 'content-type: application/json' -H "Authorization: Bearer $LOGINTOKEN" --data-binary '{"currentPassword":"admin","newPassword":"thisisyournewpassword"}' --insecure
+cURL -s "https://${URL}/v3/users?action=changepassword" -H 'content-type: application/json' -H "Authorization: Bearer $LOGINTOKEN" --data-binary '{"currentPassword":"admin","newPassword":"'${PASSWORD}'"}' --insecure
 
 # Create API key
 APIRESPONSE=`cURL -s "https://${URL}/v3/token" -H 'content-type: application/json' -H "Authorization: Bearer $LOGINTOKEN" --data-binary '{"type":"token","description":"automation"}' --insecure`
@@ -41,3 +42,6 @@ echo "${AGENTCOMMAND}"
 kubectl cluster-info --context ${KIND_CLUSTER_NAME}
 eval "${AGENTCOMMAND}"
 
+# export the cluster detail
+echo "Rancher admin password is: ${PASSWORD}"
+echo "Rancher URL is ${URL}"

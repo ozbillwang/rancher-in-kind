@@ -211,7 +211,7 @@ docker rm -f ${RANCHER_CONTAINER_NAME}; kind delete cluster ${KIND_CLUSTER_NAME}
 EOM
 
 # set Rancher admin password and add kind cluster
-./rancher-custom-password.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}"
+./rancher-custom-password.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" ${KIND_CLUSTER_NAME}
 
 # Open Rancher UI in browser
-open https://${localip}:${RANCHER_HTTPS_HOST_PORT} ${KIND_CLUSTER_NAME}
+open https://${localip}:${RANCHER_HTTPS_HOST_PORT}
