@@ -39,7 +39,7 @@ AGENTCOMMAND=`cURL -s "https://${URL}/v3/clusterregistrationtoken" -H 'content-t
 echo "${AGENTCOMMAND}"
 
 # add the kind cluster
-kubectl cluster-info --context ${KIND_CLUSTER_NAME}
+kubectl cluster-info --context kind-${KIND_CLUSTER_NAME}
 eval "${AGENTCOMMAND}"
 
 # export the cluster detail

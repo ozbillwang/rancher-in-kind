@@ -203,7 +203,7 @@ cat >&2 <<EOM
 
 - set context to kind cluster 
 
-kubectl cluster-info --context kind-kind-for-rancher
+kubectl cluster-info --context ${KIND_CLUSTER_NAME}
 
 ### Destroy
 To shut everything down, use "$0 destroy", or manually with
