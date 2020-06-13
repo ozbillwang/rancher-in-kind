@@ -63,7 +63,7 @@ Usage: $0 [FLAGS] [ACTIONS]
     \$ $0 create
     \$ $0 destroy
 
-Update kind (kuberentes in docker) configuration in kind.yaml (https://kind.sigs.k8s.io/)
+Update kind (kuberentes in docker) configuration in local kind.yaml (https://kind.sigs.k8s.io/)
 EOF
 }
 

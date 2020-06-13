@@ -18,7 +18,7 @@ Usage: ./rkind.sh [FLAGS] [ACTIONS]
     $ ./rkind.sh create
     $ ./rkind.sh destroy
 
-Update kind (kuberentes in docker) configuration in kind.yaml (https://kind.sigs.k8s.io/)
+Update kind (kuberentes in docker) configuration in local kind.yaml (https://kind.sigs.k8s.io/)
 ```
 
 ### Create the stack
