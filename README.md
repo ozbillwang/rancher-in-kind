@@ -9,7 +9,7 @@ This repo is used to create rancher and add a kubernetes cluster with kind (kube
 * create an imported cluster in rancher
 * add new kubernetes cluster’s nodes in the new created cluster in Rancher. You should see 4 nodes are added automatically
 
-[image.png](image.png)
+![image.png](image.png)
 
 ### Prerequisite
 
