@@ -2,6 +2,15 @@
 
 This repo is used to create rancher and add a kubernetes cluster with kind (kubernetes in docker) in Rancher.
 
+* Run Rancher UI
+* create Kubernetes cluster (by kind)
+* change rancher admin’s password
+* update server url in rancher
+* create an imported cluster in rancher
+* add new kubernetes cluster’s nodes in the new created cluster in Rancher. You should see 4 nodes are added automatically
+
+[image.png](image.png)
+
 ### Prerequisite
 
 Make sure you have installed Kind (kubernetes in docker) locally.
