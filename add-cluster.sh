@@ -5,7 +5,7 @@ set -ex
 # Forked with updates from https://gist.github.com/superseb/c363247c879e96c982495daea1125276/#file-rancher2customnodecmd-sh
 
 URL="$1"
-KIND_CLUSTER_NAME="$2"
+KIND_CLUSTER_NAME="${2:-kind-for-rancher}"
 PASSWORD="password"
 
 while ! cURL -k "https://${URL}/ping"; do sleep 3; done
@@ -28,12 +28,13 @@ APIRESPONSE=`cURL -s "https://${URL}/v3/token" -H 'content-type: application/jso
 APITOKEN=`echo $APIRESPONSE | jq -r .token`
 echo ${APITOKEN}
 
-# Configure server-URL
+# Configure server-url
 RANCHER_SERVER="${URL}"
-cURL -s "https://${URL}/v3/settings/server-URL" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" -X PUT --data-binary '{"name":"server-URL","value":"'https://$RANCHER_SERVER'"}' --insecure
+cURL -s "https://${URL}/v3/settings/server-url" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" -X PUT --data-binary '{"name":"server-URL","value":"'https://$RANCHER_SERVER'"}' --insecure
 
 # Create cluster
-CLUSTERRESPONSE=`cURL -s "https://${URL}/v3/cluster" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" --data-binary '{"type":"cluster","nodes":[],"rancherKubernetesEngineConfig":{"ignoreDockerVersion":true},"name":"'${KIND_CLUSTER_NAME}'"}' --insecure`
+CLUSTERRESPONSE=`cURL -s "https://${URL}/v3/cluster" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" --data-binary '{"type":"cluster","name":"'${KIND_CLUSTER_NAME}'","import":true}' --insecure`
+
 # Extract clusterid to use for generating the docker run command
 CLUSTERID=`echo $CLUSTERRESPONSE | jq -r .id`
 echo ${CLUSTERID}

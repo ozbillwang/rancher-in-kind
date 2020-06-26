@@ -63,7 +63,6 @@ Usage: $0 [FLAGS] [ACTIONS]
     \$ $0 create
     \$ $0 destroy
 
-Update kind (kuberentes in docker) configuration in local kind.yaml (https://kind.sigs.k8s.io/)
 EOF
 }
 
@@ -197,7 +196,7 @@ cat >&2 <<EOM
 - Import KIND cluster to Rancher (via https://${localip}:${RANCHER_HTTPS_HOST_PORT}/g/clusters/add?provider=import)
   (select "Import Existing cluster" when adding a cluster)
   > To work around "Unable to connect to the server: x509: certificate signed by unknown authority"
-  > use "curl --insecure" which is provided by Rancher UI to get the manigest, piping it's output to, for example:
+  > use "curl --insecure" which is provided by Rancher UI to get the manifest, piping it's output to, for example:
 
     curl --insecure -sfL https://${localip}:${RANCHER_HTTPS_HOST_PORT}/v3/import/6qbm7q9lk7gmqsgt4l2hrrchlxbfh6fjskzb8tx84mjrl9jvhb8xcm.yaml | kubectl apply -f -
 
@@ -210,9 +209,10 @@ To shut everything down, use "$0 destroy", or manually with
 docker rm -f ${RANCHER_CONTAINER_NAME}; kind delete cluster ${KIND_CLUSTER_NAME}
 EOM
 
+echo https://${localip}:${RANCHER_HTTPS_HOST_PORT} > rancher_url
+
 # set Rancher admin password and add kind cluster
 ./add-cluster.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" ${KIND_CLUSTER_NAME}
 
 # Open Rancher UI in browser
-echo https://${localip}:${RANCHER_HTTPS_HOST_PORT} > rancher_url
 open https://${localip}:${RANCHER_HTTPS_HOST_PORT}
