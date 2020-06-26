@@ -84,4 +84,4 @@ Deleting cluster "kind-for-rancher" ...
 
 ### custom kind configuration
 
-If you'd like to change the kind configuration, please update its file [kind.yaml](kind.yaml). For details, go through https://kind.sigs.k8s.io/
+If you'd like to change the kind configuration, please update file [kind.yaml](kind.yaml). For details, go through https://kind.sigs.k8s.io/

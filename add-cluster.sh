@@ -44,12 +44,9 @@ AGENTCOMMAND=`cURL -s "https://${URL}/v3/clusters/${CLUSTERID}/clusterregistrati
 # Show the command
 echo "${AGENTCOMMAND}"
 
-command=$(echo "${AGENTCOMMAND}" |cut -d \| -f1)
-command |sh
-
 # add the kind cluster
 kubectl cluster-info --context kind-${KIND_CLUSTER_NAME}
-eval "${AGENTCOMMAND}"
+"${AGENTCOMMAND}"
 
 # export the cluster detail
 echo "Rancher admin password is: ${PASSWORD}"
