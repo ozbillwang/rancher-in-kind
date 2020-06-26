@@ -2,7 +2,7 @@
 
 set -ex
 
-# Forked with updates from https://gist.githubusercontent.com/superseb/c363247c879e96c982495daea1125276/raw/98d9c0590992f2b7e209ae4e0a7da7da1db5aee0/rancher2customnodecmd.sh
+# Forked with updates from https://gist.github.com/superseb/c363247c879e96c982495daea1125276/#file-rancher2customnodecmd-sh
 
 URL="$1"
 KIND_CLUSTER_NAME="$2"
