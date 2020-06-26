@@ -46,7 +46,7 @@ echo "${AGENTCOMMAND}"
 
 # add the kind cluster
 kubectl cluster-info --context kind-${KIND_CLUSTER_NAME}
-"${AGENTCOMMAND}"
+eval "${AGENTCOMMAND}"
 
 # export the cluster detail
 echo "Rancher admin password is: ${PASSWORD}"
