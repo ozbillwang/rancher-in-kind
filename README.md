@@ -2,6 +2,12 @@
 
 This repo is used to create rancher and add a kubernetes cluster with kind (kubernetes in docker) in Rancher.
 
+### Prerequisite
+
+Make sure you have installed Kind (kubernetes in docker) locally.
+
+The installation instruction is here: https://kind.sigs.k8s.io/docs/user/quick-start/
+
 ### Get help
 
 ```
