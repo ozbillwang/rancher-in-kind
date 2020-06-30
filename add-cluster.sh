@@ -51,5 +51,5 @@ eval "${AGENTCOMMAND}"
 
 # export the cluster detail
 echo "Rancher admin password is: ${PASSWORD}"
-echo "Rancher URL is ${URL}"
+echo "Rancher URL is https://${URL}"
 echo "Rancher account: admin / ${PASSWORD}"
