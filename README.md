@@ -13,9 +13,13 @@ This repo is used to create rancher and add a kubernetes cluster with kind (kube
 
 ### Prerequisite
 
-Make sure you have installed Kind (kubernetes in docker) locally.
+1) Make sure you have installed Kind (kubernetes in docker) locally.
 
 The installation instruction is here: https://kind.sigs.k8s.io/docs/user/quick-start/
+
+2) Adjust docker engine memory
+
+Default docker engine is set to use 2GB runtime memory, adjust it to 8GB if you can.
 
 ### Get help
 
