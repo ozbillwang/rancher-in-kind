@@ -17,6 +17,10 @@ This repo is used to create rancher and add a kubernetes cluster with kind (kube
 
 The installation instruction is here: https://kind.sigs.k8s.io/docs/user/quick-start/
 
+Notes
+
+I set one worker node only because I need share the local storage between pods. If I can get better solution, will adjust to multiple nodes.
+
 2) Adjust docker engine memory
 
 Default docker engine is set to use 2GB runtime memory, adjust it to 8GB if you can.

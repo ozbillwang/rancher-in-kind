@@ -4,11 +4,5 @@ nodes:
 - role: control-plane
 - role: worker
   extraMounts:
-  - hostPath: ./shared-worker
-    containerPath: /shared
-- role: worker
-  - hostPath: ./shared-worker2
-    containerPath: /shared
-- role: worker
-  - hostPath: ./shared-worker3
-    containerPath: /shared
+  - hostPath: ./data
+    containerPath: /data
