@@ -4,5 +4,5 @@ nodes:
 - role: control-plane
 - role: worker
   extraMounts:
-  - hostPath: ./data
+  - hostPath: /data
     containerPath: /data
