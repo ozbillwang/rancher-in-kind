@@ -10,3 +10,18 @@ nodes:
   - containerPort: 4502
     hostPort: 4502
     listenAddress: "0.0.0.0"
+  - containerPort: 8081
+    hostPort: 8081
+    listenAddress: "0.0.0.0"
+  - containerPort: 8444
+    hostPort: 8444
+    listenAddress: "0.0.0.0"
+  - containerPort: 443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+  - containerPort: 8443
+    hostPort: 8443
+    listenAddress: "0.0.0.0"
+  - containerPort: 8445
+    hostPort: 8445
+    listenAddress: "0.0.0.0"
