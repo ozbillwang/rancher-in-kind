@@ -21,7 +21,7 @@ The installation instruction is here: https://kind.sigs.k8s.io/docs/user/quick-s
 
 Default docker engine is set to use 2GB runtime memory, adjust it to 8GB if you can.
 
-3) review `kind.yaml.template`, and rename it to `kind.yaml`
+3) review `kind.yaml`
 
 Currently I only set one worker node, you can add more if you need.
 

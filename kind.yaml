@@ -4,5 +4,9 @@ nodes:
 - role: control-plane
 - role: worker
   extraMounts:
-  - hostPath: /data
+  - hostPath: ./data
     containerPath: /data
+  extraPortMappings:
+  - containerPort: 4502
+    hostPort: 4502
+    listenAddress: "0.0.0.0"
