@@ -209,7 +209,7 @@ To shut everything down, use "$0 destroy", or manually with
 docker rm -f ${RANCHER_CONTAINER_NAME}; kind delete cluster ${KIND_CLUSTER_NAME}
 EOM
 
-echo https://${localip}:${RANCHER_HTTPS_HOST_PORT} > rancher_url
+echo https://${localip}:${RANCHER_HTTPS_HOST_PORT} > rancher_url_$(date +%Y%m%d%H%M)
 
 # set Rancher admin password and add kind cluster
 ./add-cluster.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" ${KIND_CLUSTER_NAME}
