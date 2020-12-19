@@ -155,6 +155,7 @@ if [[ $(docker ps -f name=${RANCHER_CONTAINER_NAME} -q | wc -l) -ne 0 ]]; then
 fi
 info "Launching Rancher container"
 if docker run -d \
+              --privileged \
               --restart=unless-stopped \
               --name ${RANCHER_CONTAINER_NAME}  \
               -p ${RANCHER_HTTP_HOST_PORT}:80   \
@@ -183,7 +184,7 @@ if [[ $(kind get clusters | grep -c ${KIND_CLUSTER_NAME}) -ne 0 ]]; then
     ;;
   esac
 else
-  info "Creating Kind cluster with 3 nodes (default)..."
+  info "Creating Kind cluster ..."
   kind create cluster --name ${KIND_CLUSTER_NAME} --config kind.yaml
 fi
 
