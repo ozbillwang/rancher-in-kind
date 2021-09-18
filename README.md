@@ -4,12 +4,18 @@ This repo is used to create rancher and add a kubernetes cluster with kind (kube
 
 * Run Rancher UI
 * create Kubernetes cluster (by kind)
-* change rancher admin’s password
+* Init rancher admin’s password
 * update server url in rancher
 * create an imported cluster in rancher
 * add new kubernetes cluster’s nodes in the new created cluster in Rancher. You should see 4 nodes are added automatically
 
 ![image.png](image.png)
+
+### Notes
+
+this repo doesn't work with latest rancher version any more, there are workarounds mentioned in https://github.com/ozbillwang/rancher-in-kind/issues/3#issuecomment-921899983
+
+Also Let me know if this works or not. 
 
 ### Prerequisite
 
@@ -19,7 +25,7 @@ The installation instruction is here: https://kind.sigs.k8s.io/docs/user/quick-s
 
 2) Adjust docker engine memory
 
-Default docker engine is set to use 2GB runtime memory, adjust it to 8GB if you can.
+Default docker engine is set to use 2GB runtime memory, adjust it to 8GB+ if you can.
 
 3) review `kind.yaml`
 
