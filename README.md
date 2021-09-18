@@ -1,13 +1,12 @@
 # Usage
 
-This repo is used to create rancher and add a kubernetes cluster with kind (kubernetes in docker) in Rancher.
+This repo is to create rancher and add [kind](https://github.com/kubernetes-sigs/kind) (Kubernetes IN Docker) into Rancher automatically with all-in-one script
 
-* Run Rancher UI
-* create Kubernetes cluster (by kind)
+* Create Rancher UI
+* create Kind Kubernetes cluster
 * Init rancher admin’s password
 * update server url in rancher
-* create an imported cluster in rancher
-* add new kubernetes cluster’s nodes in the new created cluster in Rancher. You should see 4 nodes are added automatically
+* import kind cluster into rancher
 
 ![image.png](image.png)
 
