@@ -216,7 +216,7 @@ EOM
 echo https://${localip}:${RANCHER_HTTPS_HOST_PORT} > rancher_url_$(date +%Y%m%d%H%M)
 
 # set Rancher admin password and add kind cluster
-./add-cluster.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" "${KIND_CLUSTER_NAME}" "${RANCHER_CONTAINER_ID}"
+bash -x ./add-cluster.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" "${KIND_CLUSTER_NAME}" "${RANCHER_CONTAINER_ID}"
 
 # Open Rancher UI in browser
 open https://${localip}:${RANCHER_HTTPS_HOST_PORT}

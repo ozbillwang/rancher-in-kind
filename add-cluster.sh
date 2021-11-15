@@ -13,7 +13,7 @@ PASSWORD="password"
 while ! curl -k "https://${URL}/ping"; do sleep 3; done
 
 # Login
-#curl -vvv "https://${URL}/v3-public/localProviders/local?action=login" -H 'content-type: application/json' --data-binary '{"username":"admin","password":"'${INIT_PASSWORD}'"}' --insecure
+curl -vvv "https://${URL}/v3-public/localProviders/local?action=login" -H 'content-type: application/json' --data-binary '{"username":"admin","password":"'${INIT_PASSWORD}'"}' --insecure
 LOGINRESPONSE=`curl -s "https://${URL}/v3-public/localProviders/local?action=login" -H 'content-type: application/json' --data-binary '{"username":"admin","password":"'${INIT_PASSWORD}'"}' --insecure`
 LOGINTOKEN=`echo $LOGINRESPONSE | jq -r .token`
 echo ${LOGINTOKEN}
