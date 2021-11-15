@@ -10,6 +10,7 @@ RANCHER_CONTAINER_NAME="rancher-for-kind"
 RANCHER_HTTP_HOST_PORT=$[$[RANDOM%9000]+30000]
 RANCHER_HTTPS_HOST_PORT=$[$[RANDOM%9000]+30000]
 : ${KIND_CLUSTER_NAME:="kind-for-rancher"}
+RANCHER_VERSION=2.6.2
 
 info() {
   if [[ ${QUIET:-0} -eq 0 ]] || [[ ${DEBUG:-0} -eq 1 ]]; then
@@ -154,17 +155,19 @@ if [[ $(docker ps -f name=${RANCHER_CONTAINER_NAME} -q | wc -l) -ne 0 ]]; then
   error "Rancher container already present, delete it before trying again, exiting.."
 fi
 info "Launching Rancher container"
-if docker run -d \
+if RANCHER_CONTAINER_ID=$(docker run -d \
               --privileged \
               --restart=unless-stopped \
               --name ${RANCHER_CONTAINER_NAME}  \
               -p ${RANCHER_HTTP_HOST_PORT}:80   \
               -p ${RANCHER_HTTPS_HOST_PORT}:443 \
-              rancher/rancher; then
+              rancher/rancher:v${RANCHER_VERSION} 2>&1); then
   info "Rancher UI will be available at https://${localip}:${RANCHER_HTTPS_HOST_PORT}"
   info "It might take few up to 60 seconds for Rancher UI to become available.."
   info "While it's coming up, going to start KIND cluster"
 fi
+
+echo $RANCHER_CONTAINER_ID
 
 # Start KIND cluster
 if [[ $(kind get clusters | grep -c ${KIND_CLUSTER_NAME}) -ne 0 ]]; then
@@ -203,7 +206,7 @@ cat >&2 <<EOM
 
 - set context to kind cluster 
 
-kubectl cluster-info --context ${KIND_CLUSTER_NAME}
+kubectl cluster-info --context kind-${KIND_CLUSTER_NAME}
 
 ### Destroy
 To shut everything down, use "$0 destroy", or manually with
@@ -213,7 +216,7 @@ EOM
 echo https://${localip}:${RANCHER_HTTPS_HOST_PORT} > rancher_url_$(date +%Y%m%d%H%M)
 
 # set Rancher admin password and add kind cluster
-./add-cluster.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" ${KIND_CLUSTER_NAME}
+bash -x ./add-cluster.sh "${localip}:${RANCHER_HTTPS_HOST_PORT}" "${KIND_CLUSTER_NAME}" "${RANCHER_CONTAINER_ID}"
 
 # Open Rancher UI in browser
 open https://${localip}:${RANCHER_HTTPS_HOST_PORT}
