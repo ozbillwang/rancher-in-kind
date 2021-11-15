@@ -13,7 +13,8 @@ PASSWORD="password"
 while ! curl -k "https://${URL}/ping"; do sleep 3; done
 
 # Login
-LOGINRESPONSE=$(curl -s "https://${URL}/v3-public/localProviders/local?action=login" -H 'content-type: application/json' --data-binary '{"username":"admin","password":"'${INIT_PASSWORD}'"}' --insecure)
+#curl -vvv "https://${URL}/v3-public/localProviders/local?action=login" -H 'content-type: application/json' --data-binary '{"username":"admin","password":"'${INIT_PASSWORD}'"}' --insecure
+LOGINRESPONSE=`curl -s "https://${URL}/v3-public/localProviders/local?action=login" -H 'content-type: application/json' --data-binary '{"username":"admin","password":"'${INIT_PASSWORD}'"}' --insecure`
 LOGINTOKEN=`echo $LOGINRESPONSE | jq -r .token`
 echo ${LOGINTOKEN}
 
@@ -42,8 +43,9 @@ CLUSTERID=`echo $CLUSTERRESPONSE | jq -r .id`
 echo ${CLUSTERID}
 
 # Generate token (clusterRegistrationToken) and extract nodeCommand
-AGENTCOMMAND=`curl -s "https://${URL}/v3/clusters/${CLUSTERID}/clusterregistrationtoken" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" --data-binary '{"type":"clusterRegistrationToken","clusterId":"'$CLUSTERID'"}' --insecure | jq -r .insecureCommand`
+ID=`curl -s "https://${URL}/v3/clusters/${CLUSTERID}/clusterregistrationtoken" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" --data-binary '{"type":"clusterRegistrationToken","clusterId":"'$CLUSTERID'"}' --insecure |jq -r .id`
 
+AGENTCOMMAND=`curl -s "https://${URL}/v3/clusters/${CLUSTERID}/clusterregistrationtoken/$ID" -H 'content-type: application/json' -H "Authorization: Bearer $APITOKEN" --insecure | jq -r .insecureCommand`
 # Show the command
 echo "${AGENTCOMMAND}"
 
