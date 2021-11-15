@@ -8,7 +8,7 @@ This repo is to create rancher and add [kind](https://github.com/kubernetes-sigs
 * update server url in rancher
 * import kind cluster into rancher
 
-![image.png](image.png)
+![image](https://user-images.githubusercontent.com/8954908/141780177-a81ddc31-a144-47ad-b9a0-2fc5bce8bbda.png)
 
 ### Notes
 
