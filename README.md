@@ -77,7 +77,7 @@ $ ./rkind.sh create
 ### destroy the stack
 
 ```
-$ ./rkind.sh --destroy
+$ ./rkind.sh destroy
 ```
 
 ### custom kind configuration
