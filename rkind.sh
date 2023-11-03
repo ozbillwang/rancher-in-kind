@@ -188,7 +188,7 @@ if [[ $(kind get clusters | grep -c ${KIND_CLUSTER_NAME}) -ne 0 ]]; then
   esac
 else
   info "Creating Kind cluster ..."
-  kind create cluster --name ${KIND_CLUSTER_NAME} --config kind.yaml
+  kind create cluster --name ${KIND_CLUSTER_NAME} --config kind.yaml --image "kindest/node:v1.21.10"
 fi
 
 cat >&2 <<EOM
