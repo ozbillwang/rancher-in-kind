@@ -10,30 +10,37 @@ RANCHER_CONTAINER_NAME="rancher-for-kind"
 RANCHER_HTTP_HOST_PORT=$[$[RANDOM%9000]+30000]
 RANCHER_HTTPS_HOST_PORT=$[$[RANDOM%9000]+30000]
 : ${KIND_CLUSTER_NAME:="kind-for-rancher"}
+
+COLOR_OFF='\033[0m'
+GREEN='\033[0;92m'
+YELLOW='\033[0;33m'
+PURPLE='\033[0;95m'
+RED='\033[0;91m'
+
 RANCHER_VERSION=2.6.2
 
 info() {
   if [[ ${QUIET:-0} -eq 0 ]] || [[ ${DEBUG:-0} -eq 1 ]]; then
-    echo >&2 -e "\e[92mINFO:\e[0m $@"
+    echo >&2 -e "${GREEN}INFO:${COLOR_OFF} $@"
   fi
 }
 
 warn() {
   if [[ ${QUIET:-0} -eq 0 ]] || [[ ${DEBUG:-0} -eq 1 ]]; then
-    echo >&2 -e "\e[33mWARNING:\e[0m $@"
+    echo >&2 -e "${YELLOW}WARNING:${COLOR_OFF} $@"
   fi
 }
 
 debug(){
   if [[ ${DEBUG:-0} -eq 1 ]]; then
-    echo >&2 -e "\e[95mDEBUG:\e[0m $@"
+    echo >&2 -e "${PURPLE}DEBUG:${COLOR_OFF} $@"
   fi
 }
 
 error(){
   local msg="$1"
   local exit_code="${2:-1}"
-  echo >&2 -e "\e[91mERROR:\e[0m $1"
+  echo >&2 -e "${RED}ERROR:${COLOR_OFF} $1"
   if [[ "${exit_code}" != "-" ]]; then
     exit ${exit_code}
   fi
